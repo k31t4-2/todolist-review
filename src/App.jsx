@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ColorfulMessage from "./Components/ColorfulMessage";
 
 const App = () => {
-  console.log("first");
+  // console.log("first");
   const [num, setNum] = useState(0)
   const [faceShowFlag,setFaceShowFlag] = useState(true)
 
@@ -22,6 +22,14 @@ const App = () => {
   const onClickShowFlag = () => {
     // !マークをつけると反対という意味になるので、true,falseには向いている
     setFaceShowFlag(!faceShowFlag);
+  }
+
+  if (num % 3 === 0) {
+    // 左辺がfalseの場合、右辺を実行する
+    faceShowFlag || setFaceShowFlag(true)
+  } else {
+    // 左辺がtrueの場合、右辺を実行する
+    faceShowFlag && setFaceShowFlag(false)
   }
 
   return (
