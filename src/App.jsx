@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ColorfulMessage from "./Components/ColorfulMessage";
+import React, { useEffect, useState } from "react";
+import { ColorfulMessage } from "./Components/ColorfulMessage";
 
 const App = () => {
   // console.log("first");
@@ -24,13 +24,19 @@ const App = () => {
     setFaceShowFlag(!faceShowFlag);
   }
 
-  if (num % 3 === 0) {
-    // 左辺がfalseの場合、右辺を実行する
-    faceShowFlag || setFaceShowFlag(true)
-  } else {
-    // 左辺がtrueの場合、右辺を実行する
-    faceShowFlag && setFaceShowFlag(false)
-  }
+  // useEffectを使う理由としては、処理の分離ができたり、
+  // 特定の時だけ読み込ませるようにできる。
+  useEffect(() => {
+    if (num % 3 === 0) {
+      // 左辺がfalseの場合、右辺を実行する
+      faceShowFlag || setFaceShowFlag(true)
+    } else {
+      // 左辺がtrueの場合、右辺を実行する
+      faceShowFlag && setFaceShowFlag(false)
+    }
+    // エラーが起きているのは、useEffect内に含まれている関数（faceShowFlag）も[]内に含まなくていいのか？と促しているため
+  },[num])
+
 
   return (
     <>

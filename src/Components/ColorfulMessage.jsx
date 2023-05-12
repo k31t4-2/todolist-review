@@ -1,6 +1,6 @@
 import React from "react";
 
-const ColorfulMessage = (props) => {
+export const ColorfulMessage = (props) => {
 
   // 毎回、props.ooと書くのは面倒なので、
   // 分割代入でpropsを渡してあげることで、
@@ -21,5 +21,3 @@ const ColorfulMessage = (props) => {
     </>
   )
 }
-
-export default ColorfulMessage;
