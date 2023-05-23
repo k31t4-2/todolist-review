@@ -24,12 +24,34 @@ const App = () => {
     setTodo("")
   }
 
-  const DeleteTodo = (index) => {
-      const newTodo = [...InCompleteTodos]
-      newTodo.splice(index,1)
+// 削除ボタン　-------------------
+const onClickDeleteTodo = (index) => {
+  const newTodo = [...InCompleteTodos]
+  newTodo.splice(index,1)
 
-      setInCompleteTodos(newTodo)
-    }
+  setInCompleteTodos(newTodo)
+}
+
+// 完了ボタン　-------------------
+const onClickCompleteTodo = (index) => {
+  const newTodo = [...InCompleteTodos]
+  newTodo.splice(index, 1)
+  setInCompleteTodos(newTodo)
+
+  // 削除したものを完了リストに追加する
+  const NewCompleteTodos = [...CompleteTodos, InCompleteTodos[index]]
+  setCompleteTodos(NewCompleteTodos)
+}
+
+// 完了ボタン　-------------------
+  const onClickReturnTodo = (index) => {
+    const newTodo = [...CompleteTodos]
+    newTodo.splice(index, 1)
+    setCompleteTodos(newTodo)
+
+    const NewInCompleteTodo = [...InCompleteTodos, CompleteTodos[index]]
+    setInCompleteTodos(NewInCompleteTodo)
+}
 
   return (
     <>
@@ -56,8 +78,8 @@ const App = () => {
               <li key={todo}>
                 <div>
                   <p>{todo}</p>
-                  <button>完了</button>
-                  <button onClick={() => DeleteTodo(index)}>削除</button>
+                  <button onClick={() => onClickCompleteTodo(index)}>完了</button>
+                  <button onClick={() => onClickDeleteTodo(index)}>削除</button>
                 </div>
               </li>
             );
@@ -69,12 +91,12 @@ const App = () => {
       <section>
         <h1>完了のTODO</h1>
         <ul>
-          {CompleteTodos.map((todo) => {
+          {CompleteTodos.map((todo,index) => {
             return (
               <li key={todo}>
                 <div>
                   <p>{todo}</p>
-                  <button>戻す</button>
+                  <button onClick={() => onClickReturnTodo(index)}>戻す</button>
                 </div>
               </li>
               )
