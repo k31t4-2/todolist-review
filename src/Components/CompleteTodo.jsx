@@ -2,10 +2,15 @@ import React from "react";
 
 export const CompleteTodo = (props) => {
 
+  const style = {
+    backgroundColor: "skyblue",
+    minHeight: "200px"
+  }
+
   const { A,B } = props;
 
   return (
-          <section>
+          <section style={style}>
         <h1>完了のTODO</h1>
         <ul>
           {A.map((todo,index) => {

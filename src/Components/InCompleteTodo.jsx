@@ -2,9 +2,15 @@ import React from "react";
 
 export const InCompleteTodo = (props) => {
 
+  const style = {
+    backgroundColor: "orange",
+    minHeight: "200px"
+  }
+
   const {I,OCC,OCD} = props
+
   return (
-          <section>
+          <section style={style}>
         <h1>未完了のTODO</h1>
         <ul>
           {I.map((todo,index) => {

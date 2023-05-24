@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import "./App.css";
 import { InputTodo } from "./Components/InputTodo";
 import { InCompleteTodo } from "./Components/InCompleteTodo";
 import { CompleteTodo } from "./Components/CompleteTodo";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 const App = () => {
 
@@ -19,7 +21,7 @@ const App = () => {
     setTodo("")
   }
 
-// 削除ボタン　-------------------
+// 削除ボタン -------------------
 const onClickDeleteTodo = (index) => {
   const newTodo = [...InCompleteTodos]
   newTodo.splice(index,1)
@@ -27,7 +29,7 @@ const onClickDeleteTodo = (index) => {
   setInCompleteTodos(newTodo)
 }
 
-// 完了ボタン　-------------------
+// 完了ボタン -------------------
 const onClickCompleteTodo = (index) => {
   const newTodo = [...InCompleteTodos]
   newTodo.splice(index, 1)
@@ -38,7 +40,7 @@ const onClickCompleteTodo = (index) => {
   setCompleteTodos(NewCompleteTodos)
 }
 
-// 完了ボタン　-------------------
+// 戻るボタン -------------------
   const onClickReturnTodo = (index) => {
     const newTodo = [...CompleteTodos]
     newTodo.splice(index, 1)
@@ -54,7 +56,16 @@ const onClickCompleteTodo = (index) => {
         todoText={todo}
         onChange={ChangeTodoText}
         onClick={AddTodo}
+        disabled={InCompleteTodos.length >= 3}
       />
+
+
+
+      {/* 左がtrueの時に右辺を返す式を書くには、&&の式を用いる */}
+      {InCompleteTodos.length >= 3 &&
+        <p style={{ margin: "0px", textAlign: "center", color: "red" }}>
+          タスクが3個以上あります。<br />消化してから追加しましょう。</p>
+      }
 
       <InCompleteTodo
         I={InCompleteTodos}
